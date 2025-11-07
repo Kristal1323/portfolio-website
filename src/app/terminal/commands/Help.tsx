@@ -3,6 +3,7 @@ export default function Help() {
     <div className="space-y-1">
       <p>Available commands:</p>
       <p>whoami       — info about Kristal</p>
+      <p>skills       — technical stack</p>
       <p>help         — show menu of available commands</p>
     </div>
   );
