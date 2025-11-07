@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+
+import { useState, useRef, useEffect } from "react";
 import BootSequence from "./BootSequence";
 import { executeCommand } from "./CommandRegistry";
 import TypingText from "./TypingText";
@@ -12,11 +13,6 @@ export default function Terminal() {
   const terminalEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setBooted(true), 2500);
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
     if (booted) inputRef.current?.focus();
   }, [booted]);
 
@@ -27,7 +23,6 @@ export default function Terminal() {
   const handleCommand = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
-
     const cmd = input.trim();
     const output = await executeCommand(cmd);
     setHistory((prev) => [...prev, { input: `$ ${cmd}`, output }]);
@@ -42,8 +37,9 @@ export default function Terminal() {
         <div className="w-3 h-3 rounded-full bg-green-500"></div>
       </div>
 
+      {/* ↓↓↓ The important part ↓↓↓ */}
       {!booted ? (
-        <BootSequence />
+        <BootSequence onBootComplete={() => setBooted(true)} />
       ) : (
         <div className="font-mono text-[var(--green)] leading-relaxed space-y-2 overflow-y-auto max-h-[60vh]">
           {history.map((entry, i) => (
@@ -52,7 +48,6 @@ export default function Terminal() {
               <div className="ml-4">{entry.output}</div>
             </div>
           ))}
-
           <form onSubmit={handleCommand} className="flex mt-2">
             <span className="text-green-400 mr-2">$</span>
             <input
