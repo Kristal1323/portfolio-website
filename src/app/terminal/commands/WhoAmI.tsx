@@ -1,13 +1,11 @@
+"use client";
+import { motion } from "framer-motion";
 import TypingText from "../TypingText";
 
 export default function WhoAmI() {
-  const lines = [
-    "Kristal Sin",
-    "Software Engineer",
-    "Brisbane, Australia",
-    "",
-    "Bachelor of Computer Science — University of Queensland, July 2023",
-    "GPA: 6.25/7 | Relevant Coursework:",
+  const headerDelay = 0.3;
+
+  const coursework = [
     "→ Introduction to Software Engineering",
     "→ Computer Systems Principles & Programming",
     "→ Algorithms & Data Structures",
@@ -15,14 +13,104 @@ export default function WhoAmI() {
     "→ Cloud Computing",
     "→ Web/Mobile Programming",
     "→ Fundamentals of Data Science",
-    "→ Information Systems"
+    "→ Information Systems",
   ];
 
   return (
-    <div>
-      {lines.map((line, i) => (
-        <TypingText key={i} text={line} speed={20} />
-      ))}
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="space-y-4 font-mono text-green-300"
+    >
+      {/* Name */}
+      <motion.h1
+        className="text-2xl md:text-3xl font-bold text-green-400 tracking-wide drop-shadow-[0_0_8px_rgba(0,255,156,0.7)]"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: headerDelay }}
+      >
+        Kristal Sin
+      </motion.h1>
+
+      {/* Role & Location */}
+      <motion.p
+        className="text-lg text-green-300/90"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: headerDelay + 0.2 }}
+      >
+        Software Engineer
+      </motion.p>
+      <motion.p
+        className="text-sm text-green-400/70"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: headerDelay + 0.4 }}
+      >
+        Brisbane, Australia 🇦🇺
+      </motion.p>
+
+      {/* Divider */}
+      <p className="text-green-500/60 mt-2">
+        ────────────────────────────────────────────────
+      </p>
+
+      {/* Education */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: headerDelay + 0.6 }}
+        className="space-y-2"
+      >
+        <p className="text-green-400 font-semibold">
+          🎓 Bachelor of Computer Science — University of Queensland (July 2023)
+        </p>
+        <p className="text-green-300/90 text-sm">
+          GPA: <span className="text-green-200 font-semibold">6.25 / 7</span>
+        </p>
+        <p className="text-green-500/70 text-sm">
+          Relevant Coursework:
+        </p>
+
+        {/* Coursework list */}
+        <motion.ul
+          initial="hidden"
+          animate="show"
+          variants={{
+            hidden: {},
+            show: { transition: { staggerChildren: 0.05 } },
+          }}
+          className="space-y-1 pl-3"
+        >
+          {coursework.map((line, i) => (
+            <motion.li
+              key={i}
+              variants={{
+                hidden: { opacity: 0, x: -5 },
+                show: { opacity: 1, x: 0 },
+              }}
+            >
+              <TypingText text={line} speed={20} />
+            </motion.li>
+          ))}
+        </motion.ul>
+      </motion.div>
+
+      {/* Footer Divider */}
+      <p className="text-green-500/60">
+        ────────────────────────────────────────────────
+      </p>
+
+      {/* Signature tagline */}
+      <motion.p
+        className="italic text-green-400/70 text-sm mt-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8 }}
+      >
+        “Building intelligent, human-centered systems that bridge ideas with impact.”
+      </motion.p>
+    </motion.div>
   );
 }
