@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { BsFillCircleFill } from "react-icons/bs";
 
 export default function Experience() {
@@ -40,15 +41,19 @@ export default function Experience() {
           "Building a scalable data synchronization service within BHP’s Haul Tune platform to integrate real-time haul-truck telemetry with Short Range Forecast data, focusing on high-throughput ETL pipelines.",
           "Designing scalable validation and reconciliation logic to align real-time machine activity with forecast plans across multiple mine sites.",
         ],
+        active: true,
       },
     ],
   };
+
+  // track which rotations are expanded
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const toggle = (i: number) => setOpenIndex((prev) => (prev === i ? null : i));
 
   const container = {
     hidden: {},
     show: { transition: { staggerChildren: 0.1 } },
   };
-
   const item = {
     hidden: { opacity: 0, y: 6 },
     show: { opacity: 1, y: 0 },
@@ -61,6 +66,19 @@ export default function Experience() {
       variants={container}
       className="text-green-300 space-y-6"
     >
+      {/* Intro */}
+      <motion.div variants={item} className="font-mono text-green-400 mb-4">
+        <p>[ EXPERIENCE LOG ]</p>
+        <motion.p
+          className="text-green-500/70 text-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 1, 0, 1] }}
+          transition={{ duration: 2.5, repeat: Infinity }}
+        >
+          Initializing work history...
+        </motion.p>
+      </motion.div>
+
       {/* Header */}
       <motion.div variants={item}>
         <p className="text-green-400 font-semibold text-lg">
@@ -74,7 +92,6 @@ export default function Experience() {
         </p>
       </motion.div>
 
-      {/* Divider */}
       <p className="text-green-500/70">
         ────────────────────────────────────────────────
       </p>
@@ -85,36 +102,73 @@ export default function Experience() {
         className="relative border-l border-green-500/40 pl-6 space-y-6"
       >
         {experience.rotations.map((rot, idx) => (
-          <motion.div key={idx} variants={item} className="relative">
-            {/* Timeline dot */}
-            <BsFillCircleFill
-              size={10}
-              className="absolute -left-[6.5px] top-[6px] text-green-400 drop-shadow-[0_0_6px_rgba(0,255,156,0.8)]"
-            />
-            <div>
-              <p className="font-semibold text-green-400">
+          <motion.div
+            key={idx}
+            variants={item}
+            transition={{ delay: idx * 0.15 }}
+            className="relative"
+          >
+            {/* Dot */}
+            <motion.div
+              className={`absolute -left-[6.5px] top-[6px] ${
+                rot.active
+                  ? "text-green-400 drop-shadow-[0_0_10px_rgba(0,255,156,0.9)]"
+                  : "text-green-500/70"
+              }`}
+              animate={
+                rot.active
+                  ? { opacity: [0.5, 1, 0.5] }
+                  : { opacity: 1 }
+              }
+              transition={
+                rot.active
+                  ? { duration: 1.8, repeat: Infinity, ease: "easeInOut" }
+                  : {}
+              }
+            >
+              <BsFillCircleFill size={10} />
+            </motion.div>
+
+            {/* Clickable summary */}
+            <div
+              onClick={() => toggle(idx)}
+              className="cursor-pointer select-none"
+            >
+              <p className="font-semibold text-green-400 hover:text-green-200 transition-colors">
                 ⬥ {rot.name}
               </p>
               <p className="text-green-500/80 text-sm mb-1">{rot.period}</p>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                {rot.details.map((line, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: -5 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="text-green-300/90 leading-relaxed"
-                  >
-                    {line}
-                  </motion.li>
-                ))}
-              </ul>
             </div>
+
+            {/* Expandable details */}
+            <AnimatePresence>
+              {openIndex === idx && (
+                <motion.ul
+                  className="list-disc list-inside text-sm space-y-1 overflow-hidden"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {rot.details.map((line, i) => (
+                    <motion.li
+                      key={i}
+                      initial={{ opacity: 0, x: -5 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ delay: i * 0.05 }}
+                      className="text-green-300/90 leading-relaxed"
+                    >
+                      {line}
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              )}
+            </AnimatePresence>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Closing divider */}
       <p className="text-green-500/70">
         ────────────────────────────────────────────────
       </p>

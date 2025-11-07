@@ -4,6 +4,7 @@ export default function Help() {
       <p>Available commands:</p>
       <p>whoami       — info about Kristal</p>
       <p>skills       — technical stack</p>
+      <p>experience   — show work experience</p>
       <p>help         — show menu of available commands</p>
     </div>
   );
