@@ -1,5 +1,5 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 const logs = [
@@ -11,7 +11,7 @@ const logs = [
 
 export default function BootSequence({ onBootComplete }: { onBootComplete?: () => void }) {
   const [finished, setFinished] = useState(false); // when logs finish printing
-  const [exiting, setExiting] = useState(false);   // fade-out on Enter
+  const [exiting, setExiting] = useState(false);   // fade-out on Enter or Tap
 
   // Step 1: run through logs
   useEffect(() => {
@@ -19,22 +19,33 @@ export default function BootSequence({ onBootComplete }: { onBootComplete?: () =
     return () => clearTimeout(timer);
   }, []);
 
-  // Step 2: only when user presses Enter → exit
+  // Step 2: only when user presses Enter or taps → exit
   useEffect(() => {
-    if (!finished) return; // ignore keypresses until logs are done
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        setExiting(true);
-        setTimeout(() => onBootComplete?.(), 900); // fade duration before showing terminal
-      }
+    if (!finished) return;
+
+    const handleProceed = () => {
+      setExiting(true);
+      setTimeout(() => onBootComplete?.(), 900);
     };
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Enter") handleProceed();
+    };
+
     window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
+    window.addEventListener("click", handleProceed); // tap/click support
+    window.addEventListener("touchstart", handleProceed); // mobile tap
+
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+      window.removeEventListener("click", handleProceed);
+      window.removeEventListener("touchstart", handleProceed);
+    };
   }, [finished, onBootComplete]);
 
   return (
     <motion.div
-      className="text-green-400 space-y-1 font-mono"
+      className="text-green-400 space-y-1 font-mono select-none"
       initial={{ opacity: 1 }}
       animate={{ opacity: exiting ? 0 : 1 }}
       transition={{ duration: 0.7 }}
@@ -55,12 +66,13 @@ export default function BootSequence({ onBootComplete }: { onBootComplete?: () =
       {/* Show blinking prompt ONLY after logs finish */}
       {finished && !exiting && (
         <motion.p
-          className="text-green-500/70 mt-4 text-center text-sm md:text-base select-none"
+          className="text-green-500/70 mt-4 text-center text-sm md:text-base"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{ duration: 1.2, repeat: Infinity }}
         >
-          Press <span className="text-green-300 font-semibold">Enter</span> to begin
+          Press <span className="text-green-300 font-semibold">Enter</span> or{" "}
+          <span className="text-green-300 font-semibold">Tap</span> to begin
         </motion.p>
       )}
     </motion.div>
