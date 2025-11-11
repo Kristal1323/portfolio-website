@@ -1,18 +1,19 @@
 import dynamic from "next/dynamic";
 
-// Lazy load each command component
 const WhoAmI = dynamic(() => import("./commands/WhoAmI"));
 const Help = dynamic(() => import("./commands/Help"));
 const Skills = dynamic(() => import("./commands/Skills"));
 const Experience = dynamic(() => import("./commands/Experience"));
 const Projects = dynamic(() => import("./commands/Projects"));
 const Socials = dynamic(() => import("./commands/Socials"));
-const Resume= dynamic(() => import("./commands/Resume"));
-const Message= dynamic(() => import("./commands/Message"));
+const Resume = dynamic(() => import("./commands/Resume"));
+const Message = dynamic(() => import("./commands/Message"));
+const Quit = dynamic(() => import("./commands/Quit"));
 
 export async function executeCommand(
   cmd: string,
-  setCurrentCommand: (cmd: string | null) => void
+  setCurrentCommand: (cmd: string | null) => void,
+  onExit?: () => void      // 👈 add this optional callback
 ) {
   switch (cmd.toLowerCase()) {
     case "whoami":
@@ -32,6 +33,8 @@ export async function executeCommand(
       return <Resume />;
     case "message":
       return <Message />;
+    case "quit":
+      return <Quit onExit={onExit} />;   // ✅ use the callback from props
 
     default:
       return (
