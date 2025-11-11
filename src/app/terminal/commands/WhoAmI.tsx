@@ -64,7 +64,7 @@ export default function WhoAmI() {
         className="space-y-2"
       >
         <p className="text-green-400 font-semibold">
-          🎓 Bachelor of Computer Science — University of Queensland (July 2023)
+          🎓 B.CompSci — Univeristy of Queensland, 2020-2023
         </p>
         <p className="text-green-300/90 text-sm">
           GPA: <span className="text-green-200 font-semibold">6.25 / 7</span>
