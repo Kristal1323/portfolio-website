@@ -52,9 +52,10 @@ export default function WhoAmI() {
       </motion.p>
 
       {/* Divider */}
-      <p className="text-green-500/60 mt-2">
-        ────────────────────────────────────────────────
-      </p>
+      <div
+        className="w-full border-t border-green-500/40 opacity-70 mt-3"
+        aria-hidden="true"
+      ></div>
 
       {/* Education */}
       <motion.div
@@ -98,9 +99,10 @@ export default function WhoAmI() {
       </motion.div>
 
       {/* Footer Divider */}
-      <p className="text-green-500/60">
-        ────────────────────────────────────────────────
-      </p>
+      <div
+        className="w-full border-t border-green-500/40 opacity-70"
+        aria-hidden="true"
+      ></div>
 
       {/* Signature tagline */}
       <motion.p

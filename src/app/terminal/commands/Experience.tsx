@@ -92,9 +92,10 @@ export default function Experience() {
         </p>
       </motion.div>
 
-      <p className="text-green-500/70">
-        ────────────────────────────────────────────────
-      </p>
+      <div
+        className="w-full border-t border-green-500/40 opacity-70"
+        aria-hidden="true"
+      ></div>
 
       {/* Timeline */}
       <motion.div
@@ -169,9 +170,10 @@ export default function Experience() {
         ))}
       </motion.div>
 
-      <p className="text-green-500/70">
-        ────────────────────────────────────────────────
-      </p>
+      <div
+        className="w-full border-t border-green-500/40 opacity-70"
+        aria-hidden="true"
+      ></div>
     </motion.div>
   );
 }

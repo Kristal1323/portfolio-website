@@ -62,9 +62,10 @@ export default function Help() {
         </motion.div>
       ))}
 
-      <p className="text-green-500/70 mt-3">
-        ────────────────────────────────────────────────
-      </p>
+      <div
+        className="w-full border-t border-green-500/40 opacity-70 mt-4"
+        aria-hidden="true"
+      ></div>
 
       <motion.p
         initial={{ opacity: 0 }}

@@ -36,7 +36,7 @@ export default function Terminal() {
   };
 
   return (
-    <div className="bg-[#0a0a0a]/95 border border-green-400/10 rounded-2xl shadow-2xl p-6 w-[90%] md:w-[800px] backdrop-blur-sm relative">
+    <div className="bg-[#0a0a0a]/95 border border-green-400/10 rounded-2xl shadow-2xl p-6 w-[95%] md:w-[960px] max-w-[1100px] backdrop-blur-sm relative">
       {/* MacOS window dots */}
       <div className="flex gap-2 mb-4">
         <div className="w-3 h-3 rounded-full bg-red-500"></div>

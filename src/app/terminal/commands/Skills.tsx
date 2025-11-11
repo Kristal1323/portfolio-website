@@ -112,9 +112,10 @@ export default function Skills() {
           className="overflow-hidden"
         >
           {/* Divider */}
-          <p className="text-green-500/70">
-            ────────────────────────────────────────────────
-          </p>
+          <div
+            className="w-full border-t border-green-500/40 opacity-70 mb-3"
+            aria-hidden="true"
+          ></div>
 
           {/* Section Title */}
           <motion.p
@@ -155,12 +156,11 @@ export default function Skills() {
       ))}
 
       {/* Closing divider */}
-      <motion.p
+      <motion.div
         variants={item}
-        className="text-green-500/70"
-      >
-        ────────────────────────────────────────────────
-      </motion.p>
+        className="w-full border-t border-green-500/40 opacity-70"
+        aria-hidden="true"
+      ></motion.div>
     </motion.div>
   );
 }
