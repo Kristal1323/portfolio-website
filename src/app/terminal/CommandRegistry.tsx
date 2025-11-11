@@ -6,6 +6,7 @@ const Help = dynamic(() => import("./commands/Help"));
 const Skills = dynamic(() => import("./commands/Skills"));
 const Experience = dynamic(() => import("./commands/Experience"));
 const Projects = dynamic(() => import("./commands/Projects"));
+const Socials = dynamic(() => import("./commands/Socials"));
 
 export async function executeCommand(
   cmd: string,
@@ -23,9 +24,8 @@ export async function executeCommand(
     case "projects":
       setCurrentCommand("projects");
       return <Projects onExit={() => setCurrentCommand(null)} />;
-    case "back":
-      setCurrentCommand(null);
-      return "Returning to terminal...";
+    case "socials":
+      return <Socials />;
 
     default:
       return (
