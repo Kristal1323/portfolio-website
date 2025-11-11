@@ -8,6 +8,7 @@ const Experience = dynamic(() => import("./commands/Experience"));
 const Projects = dynamic(() => import("./commands/Projects"));
 const Socials = dynamic(() => import("./commands/Socials"));
 const Resume= dynamic(() => import("./commands/Resume"));
+const Message= dynamic(() => import("./commands/Message"));
 
 export async function executeCommand(
   cmd: string,
@@ -29,6 +30,8 @@ export async function executeCommand(
       return <Socials />;
     case "resume":
       return <Resume />;
+    case "message":
+      return <Message />;
 
     default:
       return (
