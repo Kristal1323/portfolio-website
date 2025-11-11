@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kristal Sin — Interactive Terminal Portfolio  
+[**View Live**](https://kristal-sin-portfolio.vercel.app)
 
-## Getting Started
+An immersive, **terminal-themed portfolio** built with **Next.js 16**, **React 19**, and **Tailwind CSS 4**.  
+Visitors are greeted by a cinematic boot sequence and a neon-lit terminal where they can explore Kristal’s background, skills, and projects using real-time commands—plus an IDE-style project viewer and in-terminal contact form.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Highlights
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Cinematic boot + terminal UI** — Mac-style chrome, neon text, and smooth Framer-Motion animations.  
+- **Command-palette experience** — `whoami`, `skills`, `experience`, `projects`, `socials`, and more via a dynamic command registry.  
+- **IDE-inspired project viewer** — Opens a faux VS Code layout with embedded live previews.  
+- **EmailJS-powered messaging** — Users can send a message directly inside the terminal (`message` command).  
+- **Animated circuit background** — GPU-accelerated SVG/canvas hybrid that keeps the UI lively without compromising performance.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tech Stack
 
-## Learn More
+| Layer            | Tools |
+| ---------------- | ----- |
+| Framework        | Next.js 16 (App Router) + React 19 |
+| Styling          | Tailwind CSS 4, custom CSS variables |
+| Animation        | Framer Motion |
+| Icons / Graphics | `react-icons`, custom circuit canvas |
+| Data / State     | React Hooks, TanStack Query |
+| Messaging        | EmailJS Browser SDK |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Terminal Commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Command       | Description |
+| --------------|-------------|
+| `whoami`      | Intro section with education, summary, and animated coursework. |
+| `help`        | Lists all available terminal commands. |
+| `skills`      | Categorized skill badges with subtle animation. |
+| `experience`  | Timeline of BHP rotations with expandable detail. |
+| `projects`    | Launches IDE-style project explorer with previews. |
+| `socials`     | Links to LinkedIn, GitHub, and email. |
+| `resume`      | Opens the hosted PDF resume. |
+| `backlog`     | Displays ongoing and queued initiatives. |
+| `message`     | EmailJS contact form inside the terminal. |
+| `quit`        | Triggers a cinematic outro animation. |
 
-## Deploy on Vercel
+Unrecognized commands display a `command not found` message for authentic shell behavior.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
