@@ -109,7 +109,7 @@ export default function WhoAmI() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8 }}
       >
-        “Building intelligent, human-centered systems that bridge ideas with impact.”
+        “Half logic, half daydream -- fully me.”
       </motion.p>
     </motion.div>
   );
