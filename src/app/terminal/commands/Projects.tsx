@@ -21,16 +21,16 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
       initial={{ opacity: 0, y: 5 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0 }}
-      className="bg-[#1e1e1e] text-gray-200 rounded-lg shadow-xl overflow-hidden border border-green-400/20"
+      className="bg-[#1e1e1e] text-gray-200 rounded-lg shadow-xl overflow-hidden border border-[#3a3d41]"
     >
       {/* HEADER BAR */}
-      <div className="flex items-center justify-between bg-[#2d2d2d] px-4 py-2 border-b border-green-400/20">
-        <p className="text-green-400 font-semibold text-sm tracking-wide">
+      <div className="flex items-center justify-between bg-[#3c3c3c] px-4 py-2 border-b border-[#1f1f1f]">
+        <p className="text-[#d7ba7d] font-semibold text-sm tracking-wide">
           Kristal's Projects
         </p>
         <button
           onClick={onExit}
-          className="flex items-center gap-1 text-green-300 hover:text-green-100 bg-green-500/10 hover:bg-green-500/20 px-2 py-1 rounded-md text-sm"
+          className="flex items-center gap-1 text-white bg-[#0e639c] hover:bg-[#1177bb] px-2 py-1 rounded-md text-sm transition-colors"
         >
           <FiArrowLeft /> Back to Terminal
         </button>
@@ -39,13 +39,13 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
       {/* MAIN LAYOUT */}
       <div className="flex h-[520px]">
         {/* EXPLORER PANEL */}
-        <div className="w-52 bg-[#252526] border-r border-green-500/10 p-2">
-          <p className="text-sm text-green-400 font-semibold mb-2">EXPLORER</p>
+        <div className="w-52 bg-[#252526] border-r border-[#1f1f1f] p-2">
+          <p className="text-sm text-[#c586c0] font-semibold mb-2">EXPLORER</p>
           {projects.map((proj) => (
             <div key={proj.id} className="mb-2">
               {/* Folder */}
-              <div className="flex items-center gap-2 mb-1 text-green-300">
-                <FiFolder className="text-green-400" />
+              <div className="flex items-center gap-2 mb-1 text-gray-200">
+                <FiFolder className="text-[#dcdcdc]" />
                 <p className="font-semibold">{proj.name}</p>
               </div>
 
@@ -54,8 +54,8 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
                 onClick={() => setActiveProject(proj)}
                 className={`flex items-center gap-2 w-full text-left text-sm pl-6 py-1 rounded-md ${
                   activeProject?.id === proj.id
-                    ? "bg-green-500/10 text-green-300"
-                    : "hover:bg-green-400/10 text-green-200"
+                    ? "bg-[#264f78] text-white"
+                    : "hover:bg-white/10 text-[#d4d4d4]"
                 }`}
               >
                 <FiFileText /> {proj.file}
@@ -69,8 +69,8 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
           {activeProject ? (
             <>
               {/* File Header */}
-              <div className="flex justify-between items-center px-4 py-2 border-b border-green-400/10 bg-[#2d2d2d]">
-                <p className="text-green-300 font-mono text-sm">
+              <div className="flex justify-between items-center px-4 py-2 border-b border-[#1f1f1f] bg-[#2d2d2d]">
+                <p className="text-[#9cdcfe] font-mono text-sm">
                   {activeProject.file}
                 </p>
 
@@ -83,7 +83,7 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
                         window.open(activeProject.link, "_blank");
                       }
                     }}
-                    className="flex items-center gap-1 bg-green-500/10 hover:bg-green-500/20 px-2 py-1 rounded-md text-green-300 text-sm"
+                    className="flex items-center gap-1 bg-[#0e639c] hover:bg-[#1177bb] px-2 py-1 rounded-md text-white text-sm transition-colors"
                   >
                     <FiPlay /> Run
                   </button>
@@ -91,12 +91,12 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
               </div>
 
               {/* File Content */}
-              <div className="flex-1 overflow-y-auto p-4 font-mono text-sm text-green-200 whitespace-pre-line leading-relaxed">
+              <div className="flex-1 overflow-y-auto p-4 font-mono text-sm text-[#d4d4d4] whitespace-pre-line leading-relaxed">
                 {activeProject.description}
               </div>
             </>
           ) : (
-            <div className="flex-1 flex items-center justify-center text-green-400/70 font-mono text-sm">
+            <div className="flex-1 flex items-center justify-center text-[#9cdcfe]/70 font-mono text-sm">
               Select a project file to open its code.
             </div>
           )}
@@ -104,10 +104,10 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
       </div>
 
       {/* TERMINAL FOOTER */}
-      <div className="bg-black text-green-400 font-mono text-sm px-4 py-2 border-t border-green-400/20">
+      <div className="bg-[#1f2428] text-[#9cdcfe] font-mono text-sm px-4 py-2 border-t border-[#3a3d41]">
         <p>
           $ Click{" "}
-          <span className="text-green-200 font-semibold">Back to Terminal</span>{" "}
+          <span className="text-white font-semibold">Back to Terminal</span>{" "}
           to return.
         </p>
       </div>
@@ -121,11 +121,11 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
           >
-            <div className="relative w-[90%] h-[80%] bg-[#111] rounded-lg overflow-hidden border border-green-400/30 shadow-2xl">
+            <div className="relative w-[90%] h-[80%] bg-[#1c1c1c] rounded-lg overflow-hidden border border-[#3a3d41] shadow-2xl">
               {/* Close button */}
               <button
                 onClick={() => setShowPreview(false)}
-                className="absolute top-2 right-2 text-green-300 hover:text-green-100 bg-green-500/10 hover:bg-green-500/20 p-2 rounded-full z-10"
+                className="absolute top-2 right-2 text-white bg-[#0e639c] hover:bg-[#1177bb] p-2 rounded-full z-10 transition-colors"
               >
                 <FiX size={18} />
               </button>
