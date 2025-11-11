@@ -6,10 +6,10 @@ export default function Help() {
     { cmd: "whoami", desc: "Show information about Kristal." },
     { cmd: "experience", desc: "Display work experience timeline." },
     { cmd: "skills", desc: "List technical proficiencies and tools." },
-    { cmd: "projects", desc: "Open the VS Code–style project interface." },
+    { cmd: "projects", desc: "Open the IDE–style project interface." },
     { cmd: "ask", desc: "Ask questions about Kristal (AI powered)." },
     { cmd: "socials", desc: "Display LinkedIn, GitHub, and contact links." },
-    { cmd: "sendmessage", desc: "Send an email directly from the terminal." },
+    { cmd: "message", desc: "Send an message to Kristal directly from the terminal." },
     { cmd: "quit", desc: "End the session with a cinematic outro." },
     { cmd: "help", desc: "Show this list of commands." },
   ];
