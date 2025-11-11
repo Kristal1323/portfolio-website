@@ -5,18 +5,19 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Quit({ onExit }: { onExit?: () => void }) {
   const [stage, setStage] = useState(0);
-  const [flicker, setFlicker] = useState(false);
+  const [showFlicker, setShowFlicker] = useState(false);
 
   useEffect(() => {
-    // progress through stages
     const timers = [
       setTimeout(() => setStage(1), 800),
       setTimeout(() => setStage(2), 2000),
       setTimeout(() => setStage(3), 3500),
-      // Trigger flicker right before exit
-      setTimeout(() => setFlicker(true), 4200),
+      // Quick flicker near the end
+      setTimeout(() => setShowFlicker(true), 4200),
+      // End sequence and reset
       setTimeout(() => {
-        if (onExit) onExit();
+        setShowFlicker(false);
+        onExit?.();
       }, 5500),
     ];
     return () => timers.forEach(clearTimeout);
@@ -24,33 +25,30 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
 
   return (
     <div className="relative overflow-hidden">
-      {/* Flicker overlay */}
+      {/* Flicker overlay (short burst effect) */}
       <AnimatePresence>
-        {flicker && (
+        {showFlicker && (
           <motion.div
             key="flicker"
             initial={{ opacity: 0 }}
             animate={{
-              opacity: [0, 0.7, 0.3, 1],
+              opacity: [0, 0.7, 0.2, 0.9, 0],
               backgroundColor: ["#0a0a0a", "#000000", "#0a0a0a"],
             }}
-            transition={{
-              duration: 1.2,
-              ease: "easeInOut",
-            }}
-            exit={{ opacity: 1 }}
-            className="fixed inset-0 bg-black z-50"
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black pointer-events-none"
           />
         )}
       </AnimatePresence>
 
-      {/* Main shutdown text sequence */}
+      {/* Shutdown sequence */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
-        className="font-mono text-green-300 text-center py-10 select-none"
+        className="font-mono text-green-300 text-center py-10 select-none relative z-10"
       >
         <AnimatePresence mode="wait">
           {stage === 0 && (
@@ -93,14 +91,10 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
               key="stage3"
               initial={{ opacity: 0 }}
               animate={{
-                opacity: [1, 0.4, 1, 0],
-                filter: [
-                  "brightness(1.2)",
-                  "brightness(0.8)",
-                  "brightness(0)",
-                ],
+                opacity: [1, 0.5, 1, 0],
+                filter: ["brightness(1.2)", "brightness(0.8)", "brightness(0)"],
               }}
-              transition={{ duration: 2, ease: "easeInOut" }}
+              transition={{ duration: 1.6, ease: "easeInOut" }}
               className="pt-10"
             >
               <p className="text-green-400 text-lg font-semibold">
@@ -113,17 +107,6 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
           )}
         </AnimatePresence>
       </motion.div>
-
-      {/* Final fade-to-black overlay */}
-      {flicker && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 1 }}
-          className="fixed inset-0 bg-black z-40"
-        />
-      )}
     </div>
   );
 }
-

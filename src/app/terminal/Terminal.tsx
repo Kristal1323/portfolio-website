@@ -7,7 +7,6 @@ import { executeCommand } from "./CommandRegistry";
 import Projects from "./commands/Projects";
 
 export default function Terminal() {
-  // null = powered off, false = booting, true = running
   const [booted, setBooted] = useState<boolean | null>(null);
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<{ input: string; output: React.ReactNode }[]>([]);
@@ -28,7 +27,7 @@ export default function Terminal() {
     if (!input.trim()) return;
 
     const cmd = input.trim();
-    const output = await executeCommand(cmd, setCurrentCommand, () => setBooted(null)); // back to power-off state
+    const output = await executeCommand(cmd, setCurrentCommand, () => setBooted(null));
     setHistory((prev) => [...prev, { input: `$ ${cmd}`, output }]);
     setInput("");
   };
@@ -36,7 +35,7 @@ export default function Terminal() {
   return (
     <div className="relative flex flex-col items-center justify-center w-full min-h-[60vh]">
       <AnimatePresence mode="wait">
-        {/* Power-off screen */}
+        {/* -------------------- POWER-OFF STATE -------------------- */}
         {booted === null && (
           <motion.div
             key="poweroff"
@@ -44,23 +43,57 @@ export default function Terminal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center font-mono text-green-400 space-y-4"
+            className="text-center font-mono text-green-400 space-y-4 bg-transparent"
           >
+            {/* Glowing button */}
             <motion.button
-              whileHover={{ scale: 1.05, textShadow: "0 0 10px rgba(0,255,156,0.8)" }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{
+                scale: 1.1,
+                boxShadow: "0 0 18px rgba(0,255,156,0.8)",
+              }}
+              animate={{
+                boxShadow: [
+                  "0 0 8px rgba(0,255,156,0.4)",
+                  "0 0 16px rgba(0,255,156,0.7)",
+                  "0 0 8px rgba(0,255,156,0.4)",
+                ],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
               onClick={() => setBooted(false)}
-              className="border border-green-400/60 px-6 py-2 rounded-md bg-black/60 hover:bg-green-500/10 transition"
+              className="border border-green-400/60 px-6 py-2 rounded-md bg-black/70 hover:bg-green-500/10 transition-all text-green-300 font-semibold relative overflow-hidden"
             >
+              {/* Subtle scanline shimmer */}
+              <motion.span
+                className="absolute inset-0 bg-gradient-to-t from-transparent via-green-500/20 to-transparent"
+                animate={{
+                  y: ["100%", "-100%"],
+                  opacity: [0, 0.15, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              />
               ▶ Power On
             </motion.button>
-            <p className="text-green-500/70 text-sm italic">
+
+            {/* Blinking hint text */}
+            <motion.p
+              className="text-green-500/70 text-sm italic mt-2 select-none"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.8, repeat: Infinity }}
+            >
               Click to boot KristalOS terminal
-            </p>
+            </motion.p>
           </motion.div>
         )}
 
-        {/* Boot sequence */}
+        {/* -------------------- BOOT SEQUENCE -------------------- */}
         {booted === false && (
           <motion.div
             key="boot"
@@ -73,7 +106,7 @@ export default function Terminal() {
           </motion.div>
         )}
 
-        {/* Active terminal */}
+        {/* -------------------- ACTIVE TERMINAL -------------------- */}
         {booted === true && (
           <motion.div
             key="terminal"
@@ -90,7 +123,6 @@ export default function Terminal() {
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
 
-            {/* Terminal content */}
             <div className="font-mono text-[var(--green)] leading-relaxed space-y-2 overflow-y-auto max-h-[60vh]">
               {currentCommand === "projects" ? (
                 <Projects onExit={() => setCurrentCommand(null)} />
@@ -122,20 +154,6 @@ export default function Terminal() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Flicker / fade-to-black overlay when shutting down */}
-      {booted === null && (
-        <motion.div
-          key="flicker"
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: [0, 0.8, 0.3, 1],
-            backgroundColor: ["#000000", "#0a0a0a", "#000000"],
-          }}
-          transition={{ duration: 1.6, ease: "easeInOut" }}
-          className="fixed inset-0 pointer-events-none"
-        />
-      )}
     </div>
   );
 }
