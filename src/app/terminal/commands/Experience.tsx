@@ -46,7 +46,6 @@ export default function Experience() {
     ],
   };
 
-  // track which rotations are expanded
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const toggle = (i: number) => setOpenIndex((prev) => (prev === i ? null : i));
 
@@ -92,10 +91,15 @@ export default function Experience() {
         </p>
       </motion.div>
 
-      <div
-        className="w-full border-t border-green-500/40 opacity-70"
-        aria-hidden="true"
-      ></div>
+      <div className="w-full border-t border-green-500/40 opacity-70" />
+
+      {/* Tip message */}
+      <motion.p
+        variants={item}
+        className="text-green-500/60 text-xs italic mt-1"
+      >
+        Tip: click on each point to expand and view detailed experience.
+      </motion.p>
 
       {/* Timeline */}
       <motion.div
@@ -116,11 +120,7 @@ export default function Experience() {
                   ? "text-green-400 drop-shadow-[0_0_10px_rgba(0,255,156,0.9)]"
                   : "text-green-500/70"
               }`}
-              animate={
-                rot.active
-                  ? { opacity: [0.5, 1, 0.5] }
-                  : { opacity: 1 }
-              }
+              animate={rot.active ? { opacity: [0.5, 1, 0.5] } : { opacity: 1 }}
               transition={
                 rot.active
                   ? { duration: 1.8, repeat: Infinity, ease: "easeInOut" }
@@ -170,10 +170,7 @@ export default function Experience() {
         ))}
       </motion.div>
 
-      <div
-        className="w-full border-t border-green-500/40 opacity-70"
-        aria-hidden="true"
-      ></div>
+      <div className="w-full border-t border-green-500/40 opacity-70" />
     </motion.div>
   );
 }
