@@ -9,6 +9,7 @@ export default function Help() {
     { cmd: "projects", desc: "Open the IDE–style project interface." },
     { cmd: "ask", desc: "Ask questions about Kristal (AI powered)." },
     { cmd: "socials", desc: "Display LinkedIn, GitHub, and contact links." },
+    { cmd: "resume", desc: "Preview and download a pdf file of Kristal's resume." },
     { cmd: "message", desc: "Send an message to Kristal directly from the terminal." },
     { cmd: "quit", desc: "End the session with a cinematic outro." },
     { cmd: "help", desc: "Show this list of commands." },
