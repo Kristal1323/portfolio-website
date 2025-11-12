@@ -53,8 +53,8 @@ export default function Socials() {
         ))}
       </div>
 
-      <p className="text-green-500/60 text-xs mt-4">
-        Tip: click an icon or label to open it in a new tab.
+      <p className="text-[13px] font-mono text-[#f5d04c] tracking-wide">
+        <span className="font-semibold uppercase">Tip:</span> click an icon or label to open it in a new tab.
       </p>
     </motion.div>
   );

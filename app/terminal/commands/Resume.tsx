@@ -68,8 +68,8 @@ export default function Resume() {
             </a>
           </div>
 
-          <p className="text-xs text-green-500/70 mt-3">
-            Tip: you can type <span className="text-green-300">'resume'</span> anytime to access this again.
+          <p className="text-[13px] font-mono text-[#f5d04c] tracking-wide">
+            <span className="font-semibold uppercase">Tip:</span> you can type <span className="text-white/90">'resume'</span> anytime to access this again.
           </p>
         </motion.div>
       )}

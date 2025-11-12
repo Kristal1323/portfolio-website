@@ -79,10 +79,10 @@ export default function Help() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
-        className="text-green-400/70 text-sm italic"
+        className="text-[13px] font-mono text-[#f5d04c] tracking-wide"
       >
-        Tip: Type a command name and press{" "}
-        <span className="text-green-300 font-semibold">Enter</span> to execute.
+        <span className="font-semibold uppercase">Tip:</span> Type a command name and press{" "}
+        <span className="text-white/90 font-semibold">Enter</span> to execute.
       </motion.p>
     </motion.div>
   );

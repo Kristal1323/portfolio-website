@@ -63,12 +63,12 @@ export default function Backlog() {
           </ul>
 
           <motion.p
-            className="text-green-500/70 text-xs mt-4 italic"
+            className="text-[13px] font-mono text-[#f5d04c] tracking-wide"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4 }}
           >
-            Tip: Type <span className="text-green-300">'message'</span> to suggest new features!
+            <span className="font-semibold uppercase">Tip:</span> Type <span className="text-white/90">'message'</span> to suggest new features!
           </motion.p>
         </>
       )}

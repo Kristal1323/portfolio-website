@@ -96,9 +96,9 @@ export default function Experience() {
       {/* Tip message */}
       <motion.p
         variants={item}
-        className="text-green-500/60 text-xs italic mt-1"
+        className="text-[13px] font-mono text-[#f5d04c] tracking-wide mt-1"
       >
-        Tip: click on each point to expand and view detailed experience.
+        <span className="font-semibold uppercase">Tip:</span> click on each point to expand and view detailed experience.
       </motion.p>
 
       {/* Timeline */}
