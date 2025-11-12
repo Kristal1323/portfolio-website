@@ -170,7 +170,7 @@ export default function Terminal() {
             </div>
 
             <div
-              className={`font-mono text-[var(--green)] leading-relaxed space-y-2 overflow-y-auto ${scrollAreaMaxHeight} scrollbar-terminal pr-1`}
+              className={`font-mono text-[var(--green)] leading-relaxed space-y-2 overflow-y-auto overflow-x-visible ${scrollAreaMaxHeight} scrollbar-terminal pr-1`}
             >
               {currentCommand === "projects" ? (
                 <Projects onExit={() => setCurrentCommand(null)} />

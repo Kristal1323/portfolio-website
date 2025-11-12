@@ -22,7 +22,6 @@ export default function Backlog() {
   }, []);
 
   const upcoming = [
-    "Add macOS window control functionalities to each of the buttons",
     "Implement `ask` command — AI chatbot session to ask Kristal questions.",
     "Add system sound effects for power-on / shutdown / command actions.",
     "Introduce command autocomplete + suggestion hints.",

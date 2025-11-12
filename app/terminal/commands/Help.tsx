@@ -34,7 +34,7 @@ export default function Help() {
         Available Commands:
       </motion.p>
 
-      <div className="grid gap-2 sm:gap-3">
+      <div className="grid gap-2 sm:gap-3 overflow-visible px-2 md:px-4">
         {commands.map((c, i) => (
           <motion.div
             key={i}
@@ -42,17 +42,17 @@ export default function Help() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: i * 0.05 }}
             whileHover={{
-              scale: 1.03,
-              boxShadow: "0 0 20px rgba(0,255,166,0.35)",
+              scale: 1.02,
+              boxShadow: "0 0 18px rgba(0,255,166,0.35)",
               borderColor: "rgba(0,255,166,0.6)",
               backgroundColor: "rgba(0,0,0,0.5)",
             }}
             whileTap={{ scale: 0.98 }}
-            className="flex flex-col md:flex-row md:items-start md:gap-4 rounded-lg border border-green-500/20 bg-black/20 px-3 py-2 transition-all duration-200"
+            className="flex w-full flex-col md:flex-row md:items-start md:gap-4 rounded-lg border border-green-500/20 bg-black/20 px-3 py-2 transition-all duration-200"
           >
             {/* Command name */}
             <motion.span
-              className="text-green-400 font-bold tracking-wide md:min-w-[10ch] uppercase text-xs md:text-sm"
+              className="text-green-400 font-bold tracking-wide md:min-w-[10ch] text-xs md:text-sm"
               whileHover={{
                 color: "#00ffaa",
                 textShadow: "0px 0px 8px rgba(0,255,156,0.8)",
