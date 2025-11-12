@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import BootSequence from "./BootSequence";
 import { executeCommand } from "./CommandRegistry";
 import Projects from "./commands/Projects";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 export default function Terminal() {
   const [booted, setBooted] = useState<boolean | null>(null);
@@ -51,7 +52,7 @@ export default function Terminal() {
     ? "w-[98%] max-w-none min-h-[85vh]"
     : "w-[95%] md:w-[960px] max-w-[1100px]";
 
-  const scrollAreaMaxHeight = isFullScreen ? "max-h-[78vh]" : "max-h-[60vh]";
+  const scrollAreaMaxHeight = isFullScreen ? "78vh" : "60vh";
 
   return (
     <div className="relative flex flex-col items-center justify-center w-full min-h-[60vh]">
@@ -172,39 +173,49 @@ export default function Terminal() {
               />
             </div>
 
-            <div
-              className={`font-mono text-[var(--green)] leading-relaxed space-y-2 overflow-y-auto overflow-x-visible ${scrollAreaMaxHeight} scrollbar-terminal pr-1`}
+            <ScrollArea.Root
+              className="relative w-full overflow-hidden"
+              style={{ height: scrollAreaMaxHeight }}
             >
-              {currentCommand === "projects" ? (
-                <Projects
-                  onExit={() => setCurrentCommand(null)}
-                  isFullScreen={isFullScreen}
-                />
-              ) : (
-                <>
-                  {history.map((entry, i) => (
-                    <div key={i}>
-                      <p className="text-green-400">{entry.input}</p>
-                      <div className="ml-4">{entry.output}</div>
-                    </div>
-                  ))}
+              <ScrollArea.Viewport className="w-full h-full pr-3 font-mono text-[var(--green)] leading-relaxed space-y-2">
+                {currentCommand === "projects" ? (
+                  <Projects
+                    onExit={() => setCurrentCommand(null)}
+                    isFullScreen={isFullScreen}
+                  />
+                ) : (
+                  <>
+                    {history.map((entry, i) => (
+                      <div key={i}>
+                        <p className="text-green-400">{entry.input}</p>
+                        <div className="ml-4">{entry.output}</div>
+                      </div>
+                    ))}
 
-                  <form onSubmit={handleCommand} className="flex mt-2">
-                    <span className="text-green-400 mr-2">$</span>
-                    <input
-                      ref={inputRef}
-                      value={input}
-                      onChange={(e) => setInput(e.target.value)}
-                      className="bg-transparent border-none outline-none text-green-400 flex-1 caret-green-400"
-                      placeholder="type a command..."
-                      autoFocus
-                    />
-                  </form>
+                    <form onSubmit={handleCommand} className="flex mt-2">
+                      <span className="text-green-400 mr-2">$</span>
+                      <input
+                        ref={inputRef}
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        className="bg-transparent border-none outline-none text-green-400 flex-1 caret-green-400"
+                        placeholder="type a command..."
+                        autoFocus
+                      />
+                    </form>
 
-                  <div ref={terminalEndRef}></div>
-                </>
-              )}
-            </div>
+                    <div ref={terminalEndRef}></div>
+                  </>
+                )}
+              </ScrollArea.Viewport>
+
+              <ScrollArea.Scrollbar
+                orientation="vertical"
+                className="absolute right-1 top-2 bottom-2 flex w-[6px] rounded-full bg-white/5"
+              >
+                <ScrollArea.Thumb className="relative flex-1 rounded-full bg-gradient-to-b from-[#00ff9c] via-[#00c0ff] to-[#b388ff] shadow-[0_0_12px_rgba(0,255,156,0.6)]" />
+              </ScrollArea.Scrollbar>
+            </ScrollArea.Root>
           </motion.div>
         )}
         </AnimatePresence>
