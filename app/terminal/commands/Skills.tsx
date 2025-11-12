@@ -101,7 +101,7 @@ export default function Skills() {
       className="space-y-6 text-green-300"
     >
       {skillGroups.map((group, idx) => (
-        <motion.div key={idx} variants={item} className="overflow-hidden">
+        <motion.div key={idx} variants={item} className="overflow-visible">
           {/* Divider */}
           <div className="w-full border-t border-green-500/40 opacity-70 mb-3" />
           {/* Section Title */}
@@ -126,12 +126,13 @@ export default function Skills() {
                   key={i}
                   variants={item}
                   whileHover={{
-                    scale: 1.08,
-                    boxShadow: `0 0 10px ${s.color}`,
+                    scale: 1.03,
+                    boxShadow: `0 0 6px ${s.color}`,
                     borderColor: s.color,
                   }}
                   transition={{ type: "spring", stiffness: 250 }}
-                  className="flex items-center gap-2 border border-green-400/30 rounded-md px-3 py-1.5 bg-[#0b0b0b]/80 hover:bg-[#0f0f0f] cursor-default"
+                  className="flex items-center gap-2 border rounded-md px-3 py-1.5 bg-[#0b0b0b]/80 hover:bg-[#0f0f0f] cursor-default"
+                  style={{ borderColor: s.color }}
                 >
                   <Icon className="text-lg" style={{ color: s.color }} />
                   <span className="text-sm text-green-100">{s.name}</span>
