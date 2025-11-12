@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "./ProjectsData";
-import { FiPlay, FiX, FiFolder, FiFileText, FiArrowLeft } from "react-icons/fi";
+import { FiPlay, FiX, FiFolder, FiFileText, FiArrowLeft, FiExternalLink } from "react-icons/fi";
 
 export default function Projects({ onExit }: { onExit?: () => void }) {
   const [activeProject, setActiveProject] = useState<any>(null);
@@ -97,7 +97,7 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
             </>
           ) : (
             <div className="flex-1 flex items-center justify-center text-[#9cdcfe]/70 font-mono text-sm">
-              Select a project file to open its code.
+              Select a project file to open its content.
             </div>
           )}
         </div>
@@ -122,13 +122,24 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
             className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
           >
             <div className="relative w-[90%] h-[80%] bg-[#1c1c1c] rounded-lg overflow-hidden border border-[#3a3d41] shadow-2xl">
-              {/* Close button */}
-              <button
-                onClick={() => setShowPreview(false)}
-                className="absolute top-2 right-2 text-white bg-[#0e639c] hover:bg-[#1177bb] p-2 rounded-full z-10 transition-colors"
-              >
-                <FiX size={18} />
-              </button>
+              {/* Close and external buttons */}
+              <div className="absolute top-2 right-2 flex items-center gap-2 z-10">
+                <button
+                  onClick={() =>
+                    activeProject.link &&
+                    window.open(activeProject.link, "_blank", "noopener,noreferrer")
+                  }
+                  className="text-white bg-transparent border border-white/40 hover:bg-white/10 px-3 py-1 rounded-full flex items-center gap-1 text-xs uppercase tracking-wide transition-colors"
+                >
+                  <FiExternalLink size={14} /> New Tab
+                </button>
+                <button
+                  onClick={() => setShowPreview(false)}
+                  className="text-white bg-[#0e639c] hover:bg-[#1177bb] p-2 rounded-full transition-colors"
+                >
+                  <FiX size={18} />
+                </button>
+              </div>
 
               {/* IFRAME */}
               <iframe
