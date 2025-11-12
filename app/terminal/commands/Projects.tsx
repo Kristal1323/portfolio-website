@@ -5,7 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "./ProjectsData";
 import { FiPlay, FiX, FiFolder, FiFileText, FiArrowLeft, FiExternalLink } from "react-icons/fi";
 
-export default function Projects({ onExit }: { onExit?: () => void }) {
+export default function Projects({
+  onExit,
+  isFullScreen,
+}: {
+  onExit?: () => void;
+  isFullScreen?: boolean;
+}) {
   const [activeProject, setActiveProject] = useState<any>(null);
   const [showPreview, setShowPreview] = useState(false);
   const [iframeLoaded, setIframeLoaded] = useState(false);
@@ -15,6 +21,10 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
       setIframeLoaded(false);
     }
   }, [showPreview]);
+
+  const layoutHeight = isFullScreen
+    ? "h-[600px] lg:h-[700px]"
+    : "h-[520px]";
 
   return (
     <motion.div
@@ -37,7 +47,7 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
       </div>
 
       {/* MAIN LAYOUT */}
-      <div className="flex h-[520px]">
+      <div className={`flex ${layoutHeight}`}>
         {/* EXPLORER PANEL */}
         <div className="w-52 bg-[#252526] border-r border-[#1f1f1f] p-2">
           <p className="text-sm text-[#c586c0] font-semibold mb-2">EXPLORER</p>
@@ -119,9 +129,9 @@ export default function Projects({ onExit }: { onExit?: () => void }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 md:p-6"
           >
-            <div className="relative w-[90%] h-[80%] bg-[#1c1c1c] rounded-lg overflow-hidden border border-[#3a3d41] shadow-2xl">
+            <div className="relative w-full max-w-6xl h-[80vh] md:h-[85vh] bg-[#1c1c1c] rounded-2xl overflow-hidden border border-[#3a3d41] shadow-[0_0_45px_rgba(0,0,0,0.8)] transition-all duration-300">
               {/* Close and external buttons */}
               <div className="absolute top-2 right-2 flex items-center gap-2 z-10">
                 <button

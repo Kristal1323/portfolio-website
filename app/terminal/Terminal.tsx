@@ -173,7 +173,10 @@ export default function Terminal() {
               className={`font-mono text-[var(--green)] leading-relaxed space-y-2 overflow-y-auto overflow-x-visible ${scrollAreaMaxHeight} scrollbar-terminal pr-1`}
             >
               {currentCommand === "projects" ? (
-                <Projects onExit={() => setCurrentCommand(null)} />
+                <Projects
+                  onExit={() => setCurrentCommand(null)}
+                  isFullScreen={isFullScreen}
+                />
               ) : (
                 <>
                   {history.map((entry, i) => (
