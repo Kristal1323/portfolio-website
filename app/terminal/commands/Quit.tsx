@@ -79,6 +79,7 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
               className="space-y-2"
             >
               <p>Disconnecting subsystems...</p>
@@ -94,7 +95,7 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
                 opacity: [1, 0.5, 1, 0],
                 filter: ["brightness(1.2)", "brightness(0.8)", "brightness(0)"],
               }}
-              transition={{ duration: 1.6, ease: "easeInOut" }}
+              transition={{ duration: 2.6, ease: "easeInOut" }}
               className="pt-10"
             >
               <p className="text-green-400 text-lg font-semibold">
