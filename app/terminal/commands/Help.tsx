@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Help() {
   const commands = [
-    { cmd: "whoami", desc: "Show basic information about Kristal." },
+    { cmd: "whoami", desc: "Show background information about Kristal." },
     { cmd: "experience", desc: "Display work experience timeline." },
     { cmd: "skills", desc: "List technical proficiencies and tools." },
     { cmd: "projects", desc: "Open the IDE–style project interface." },
