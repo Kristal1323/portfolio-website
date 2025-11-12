@@ -17,7 +17,7 @@ export default function CircuitBackground() {
 
   // Generate nodes client-side to avoid SSR mismatch
   useEffect(() => {
-    const genNodes = Array.from({ length: 30 }, () => ({
+    const genNodes = Array.from({ length: 35 }, () => ({
       x: Math.random() * 100,
       y: Math.random() * 100,
       color: colors[Math.floor(Math.random() * colors.length)],
@@ -87,8 +87,9 @@ export default function CircuitBackground() {
             x2={`${line.x2}%`}
             y2={`${line.y2}%`}
             stroke={line.color}
-            strokeWidth="0.4"
-            strokeOpacity="0.35"
+            strokeWidth="0.7"
+            strokeLinecap="round"
+            strokeOpacity="0.4"
             initial={{ opacity: 0 }}
             animate={{ opacity: [0.2, 0.9, 0.3, 0.7, 0.2] }}
             transition={{
@@ -109,10 +110,10 @@ export default function CircuitBackground() {
           style={{
             left: `${node.x}%`,
             top: `${node.y}%`,
-            width: "7px",
-            height: "7px",
+            width: "10px",
+            height: "10px",
             backgroundColor: node.color,
-            boxShadow: `0 0 12px ${node.color}`,
+            boxShadow: `0 0 16px ${node.color}`,
           }}
           animate={{
             opacity: [0, 1, 0.4, 1, 0],
