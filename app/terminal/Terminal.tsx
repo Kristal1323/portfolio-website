@@ -148,7 +148,10 @@ export default function Terminal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className={`bg-[#0a0a0a]/95 border border-green-400/10 rounded-2xl shadow-2xl p-6 ${terminalSizeClasses} backdrop-blur-sm relative transition-all duration-300`}
+            className={`border border-green-400/10 rounded-2xl shadow-2xl p-6 ${terminalSizeClasses} backdrop-blur-xl relative transition-all duration-300`}
+            style={{
+              backgroundColor: "rgba(10,10,10,0.3)",
+            }}
           >
             {/* MacOS window dots */}
             <div className="flex gap-2 mb-4">
