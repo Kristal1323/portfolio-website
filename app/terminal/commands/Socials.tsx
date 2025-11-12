@@ -36,16 +36,16 @@ export default function Socials() {
         CONNECT WITH ME:
       </p>
 
-      <div className="flex flex-col space-y-3">
+      <div className="flex flex-col space-y-3 overflow-visible">
         {socials.map((item, i) => (
           <motion.a
             key={i}
             href={item.url}
             target="_blank"
             rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.95 }}
-            className={`flex items-center gap-3 text-green-200 transition-colors duration-200 ${item.color}`}
+            className={`flex items-center gap-3 text-green-200 transition-all duration-200 border border-transparent rounded-md px-2 py-2 ${item.color}`}
           >
             <span className="text-xl">{item.icon}</span>
             <span className="font-mono text-sm">{item.name}</span>
