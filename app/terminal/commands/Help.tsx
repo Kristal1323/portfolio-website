@@ -34,34 +34,41 @@ export default function Help() {
         Available Commands:
       </motion.p>
 
-      {commands.map((c, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, x: -5 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: i * 0.05 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-3 group cursor-pointer"
-        >
-          {/* Command name */}
-          <motion.span
-            className="text-green-400 font-bold tracking-wide min-w-[8ch]"
+      <div className="grid gap-2 sm:gap-3">
+        {commands.map((c, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: -5 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.05 }}
             whileHover={{
-              color: "#00ffaa",
-              textShadow: "0px 0px 8px rgba(0,255,156,0.8)",
+              scale: 1.03,
+              boxShadow: "0 0 20px rgba(0,255,166,0.35)",
+              borderColor: "rgba(0,255,166,0.6)",
+              backgroundColor: "rgba(0,0,0,0.5)",
             }}
-            transition={{ type: "spring", stiffness: 250, damping: 20 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex flex-col md:flex-row md:items-start md:gap-4 rounded-lg border border-green-500/20 bg-black/20 px-3 py-2 transition-all duration-200"
           >
-            {c.cmd}
-          </motion.span>
+            {/* Command name */}
+            <motion.span
+              className="text-green-400 font-bold tracking-wide md:min-w-[10ch] uppercase text-xs md:text-sm"
+              whileHover={{
+                color: "#00ffaa",
+                textShadow: "0px 0px 8px rgba(0,255,156,0.8)",
+              }}
+              transition={{ type: "spring", stiffness: 250, damping: 20 }}
+            >
+              {c.cmd}
+            </motion.span>
 
-          {/* Description */}
-          <span className="text-green-500/80 group-hover:text-green-300 transition-colors duration-200">
-            {c.desc}
-          </span>
-        </motion.div>
-      ))}
+            {/* Description */}
+            <span className="text-green-200/90 text-sm">
+              {c.desc}
+            </span>
+          </motion.div>
+        ))}
+      </div>
 
       <div
         className="w-full border-t border-green-500/40 opacity-70 mt-4"
