@@ -11,6 +11,8 @@ export default function Terminal() {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<{ input: string; output: React.ReactNode }[]>([]);
   const [currentCommand, setCurrentCommand] = useState<string | null>(null);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalEndRef = useRef<HTMLDivElement>(null);
 
@@ -32,9 +34,41 @@ export default function Terminal() {
     setInput("");
   };
 
+  const resetTerminal = () => {
+    setBooted(null);
+    setHistory([]);
+    setInput("");
+    setCurrentCommand(null);
+    setIsMinimized(false);
+    setIsFullScreen(false);
+  };
+
+  const handleMinimize = () => setIsMinimized(true);
+  const handleRestore = () => setIsMinimized(false);
+  const handleToggleFullScreen = () => setIsFullScreen((prev) => !prev);
+
+  const terminalSizeClasses = isFullScreen
+    ? "w-[98%] max-w-none min-h-[85vh]"
+    : "w-[95%] md:w-[960px] max-w-[1100px]";
+
+  const scrollAreaMaxHeight = isFullScreen ? "max-h-[78vh]" : "max-h-[60vh]";
+
   return (
     <div className="relative flex flex-col items-center justify-center w-full min-h-[60vh]">
-      <AnimatePresence mode="wait">
+      {isMinimized && (
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          onClick={handleRestore}
+          className="fixed bottom-6 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full border border-green-500/40 bg-black/80 text-green-300 font-mono text-sm shadow-lg hover:bg-green-500/10 transition-colors"
+        >
+          Restore KristalOS Terminal
+        </motion.button>
+      )}
+
+      {!isMinimized && (
+        <AnimatePresence mode="wait">
         {/* -------------------- POWER-OFF STATE -------------------- */}
         {booted === null && (
           <motion.div
@@ -100,7 +134,7 @@ export default function Terminal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="w-[95%] md:w-[960px] max-w-[1100px]"
+            className={`${terminalSizeClasses}`}
           >
             <BootSequence onBootComplete={() => setBooted(true)} />
           </motion.div>
@@ -114,16 +148,30 @@ export default function Terminal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-[#0a0a0a]/95 border border-green-400/10 rounded-2xl shadow-2xl p-6 w-[95%] md:w-[960px] max-w-[1100px] backdrop-blur-sm relative"
+            className={`bg-[#0a0a0a]/95 border border-green-400/10 rounded-2xl shadow-2xl p-6 ${terminalSizeClasses} backdrop-blur-sm relative transition-all duration-300`}
           >
             {/* MacOS window dots */}
             <div className="flex gap-2 mb-4">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <button
+                aria-label="Close terminal"
+                onClick={resetTerminal}
+                className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors"
+              />
+              <button
+                aria-label="Minimize terminal"
+                onClick={handleMinimize}
+                className="w-3 h-3 rounded-full bg-yellow-400 hover:bg-yellow-300 transition-colors"
+              />
+              <button
+                aria-label={isFullScreen ? "Exit full screen" : "Enter full screen"}
+                onClick={handleToggleFullScreen}
+                className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors"
+              />
             </div>
 
-            <div className="font-mono text-[var(--green)] leading-relaxed space-y-2 overflow-y-auto max-h-[60vh]">
+            <div
+              className={`font-mono text-[var(--green)] leading-relaxed space-y-2 overflow-y-auto ${scrollAreaMaxHeight} scrollbar-terminal pr-1`}
+            >
               {currentCommand === "projects" ? (
                 <Projects onExit={() => setCurrentCommand(null)} />
               ) : (
@@ -153,7 +201,8 @@ export default function Terminal() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+        </AnimatePresence>
+      )}
     </div>
   );
 }
