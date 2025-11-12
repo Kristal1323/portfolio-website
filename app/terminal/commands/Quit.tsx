@@ -83,7 +83,7 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
             >
               <p>Disconnecting subsystems...</p>
               <p>Shutting down kernel...</p>
-              <p className="text-green-500/70 italic">“Goodbye, Commander.”</p>
+              <p className="text-green-500/70 italic">“Till next time!.”</p>
             </motion.div>
           )}
           {stage === 3 && (

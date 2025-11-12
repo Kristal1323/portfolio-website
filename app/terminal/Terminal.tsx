@@ -30,7 +30,7 @@ export default function Terminal() {
     if (!input.trim()) return;
 
     const cmd = input.trim();
-    const output = await executeCommand(cmd, setCurrentCommand, () => setBooted(null));
+    const output = await executeCommand(cmd, setCurrentCommand, resetTerminal);
     setHistory((prev) => [...prev, { input: `$ ${cmd}`, output }]);
     setInput("");
   };
