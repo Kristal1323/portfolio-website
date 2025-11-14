@@ -8,11 +8,11 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setStage(1), 800),
-      setTimeout(() => setStage(2), 2000),
+      setTimeout(() => setStage(1), 600),
+      setTimeout(() => setStage(2), 1600),
       setTimeout(() => {
         onExit?.();
-      }, 5000),
+      }, 3600),
     ];
     return () => timers.forEach(clearTimeout);
   }, [onExit]);
@@ -45,7 +45,7 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.6 }}
             >
               Saving state ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%
             </motion.p>
@@ -58,7 +58,7 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
                 opacity: [1, 0.85, 0.95, 0],
               }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 1.5 }}
+              transition={{ duration: 1.1 }}
               className="space-y-2 pt-6"
             >
               <p>Disconnecting subsystems...</p>

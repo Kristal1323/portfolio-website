@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import BootSequence from "./BootSequence";
 import { executeCommand } from "./CommandRegistry";
 import Projects from "./commands/Projects";
@@ -69,9 +69,9 @@ export default function Terminal() {
       )}
 
       {!isMinimized && (
-        <AnimatePresence mode="wait">
-        {/* -------------------- POWER-OFF STATE -------------------- */}
-        {booted === null && (
+        <>
+          {/* -------------------- POWER-OFF STATE -------------------- */}
+          {booted === null && (
           <motion.div
             key="poweroff"
             initial={{ opacity: 0 }}
@@ -142,7 +142,7 @@ export default function Terminal() {
         )}
 
         {/* -------------------- ACTIVE TERMINAL -------------------- */}
-        {booted === true && (
+          {booted === true && (
           <motion.div
             key="terminal"
             initial={{ opacity: 0 }}
@@ -218,7 +218,7 @@ export default function Terminal() {
             </ScrollArea.Root>
           </motion.div>
         )}
-        </AnimatePresence>
+        </>
       )}
     </div>
   );
