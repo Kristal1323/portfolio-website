@@ -5,43 +5,20 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Quit({ onExit }: { onExit?: () => void }) {
   const [stage, setStage] = useState(0);
-  const [showFlicker, setShowFlicker] = useState(false);
 
   useEffect(() => {
     const timers = [
       setTimeout(() => setStage(1), 800),
       setTimeout(() => setStage(2), 2000),
-      setTimeout(() => setStage(3), 3500),
-      // Quick flicker near the end
-      setTimeout(() => setShowFlicker(true), 4200),
-      // End sequence and reset
       setTimeout(() => {
-        setShowFlicker(false);
         onExit?.();
-      }, 5500),
+      }, 5000),
     ];
     return () => timers.forEach(clearTimeout);
   }, [onExit]);
 
   return (
     <div className="relative overflow-hidden">
-      {/* Flicker overlay (short burst effect) */}
-      <AnimatePresence>
-        {showFlicker && (
-          <motion.div
-            key="flicker"
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: [0, 0.7, 0.2, 0.9, 0],
-              backgroundColor: ["#0a0a0a", "#000000", "#0a0a0a"],
-            }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black pointer-events-none"
-          />
-        )}
-      </AnimatePresence>
-
       {/* Shutdown sequence */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -77,32 +54,17 @@ export default function Quit({ onExit }: { onExit?: () => void }) {
             <motion.div
               key="stage2"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              animate={{
+                opacity: [1, 0.85, 0.95, 0],
+              }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-2"
+              transition={{ duration: 1.5 }}
+              className="space-y-2 pt-6"
             >
               <p>Disconnecting subsystems...</p>
               <p>Shutting down kernel...</p>
-              <p className="text-green-500/70 italic">“Till next time!.”</p>
-            </motion.div>
-          )}
-          {stage === 3 && (
-            <motion.div
-              key="stage3"
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: [1, 0.5, 1, 0],
-                filter: ["brightness(1.2)", "brightness(0.8)", "brightness(0)"],
-              }}
-              transition={{ duration: 2.6, ease: "easeInOut" }}
-              className="pt-10"
-            >
-              <p className="text-green-400 text-lg font-semibold">
-                ✨ Session Ended ✨
-              </p>
-              <p className="text-green-500/60 text-sm mt-2">
-                Thank you for visiting Kristal’s portfolio.
+              <p className="text-green-500/70 italic">
+                “Till next time! Thank you for visiting Kristal’s portfolio.”
               </p>
             </motion.div>
           )}
