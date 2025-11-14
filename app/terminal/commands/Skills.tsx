@@ -27,6 +27,10 @@ import {
 import { DiJava } from "react-icons/di";
 import { TbBrandCSharp } from "react-icons/tb";
 import { FaAws } from "react-icons/fa";
+import { 
+  TbBrandReactNative,
+  TbSql,
+ } from "react-icons/tb";
 
 export default function Skills() {
   const skillGroups = [
@@ -41,12 +45,14 @@ export default function Skills() {
         { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
         { name: "HTML", icon: SiHtml5, color: "#E34F26" },
         { name: "CSS", icon: SiCss3, color: "#1572B6" },
+        { name: "SQL", icon: TbSql, color: "#4479A1" }
       ],
     },
     {
       title: "⚙️ Frameworks & Libraries",
       skills: [
-        { name: "React", icon: SiReact, color: "#61DAFB" },
+        { name: "React", icon: SiReact, color: "#61DAFB"},
+        { name: "React Native", icon: TbBrandReactNative, color: "#61DAFB" },
         { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
         { name: "TailwindCSS", icon: SiTailwindcss, color: "#06B6D4" },
         { name: "Framer Motion", icon: SiFramer, color: "#E24064" },
@@ -60,7 +66,7 @@ export default function Skills() {
         { name: "Docker", icon: SiDocker, color: "#2496ED" },
         { name: "GitHub", icon: SiGithub, color: "#FFFFFF" },
         { name: "GitLab", icon: SiGitlab, color: "#FC6D26" },
-        { name: "Linux", icon: SiLinux, color: "#FCC624" },
+        { name: "Linux/Unix", icon: SiLinux, color: "#FCC624" },
       ],
     },
     {
@@ -76,7 +82,7 @@ export default function Skills() {
       title: "🧰 Tools & Collaboration",
       skills: [
         { name: "Jira", icon: SiJira, color: "#0052CC" },
-        { name: "Confluence", icon: SiConfluence, color: "#172B4D" },
+        { name: "Confluence", icon: SiConfluence, color: "#172B4D" },        
       ],
     },
   ];
@@ -126,8 +132,8 @@ export default function Skills() {
                   key={i}
                   variants={item}
                   whileHover={{
-                    scale: 1.03,
-                    boxShadow: `0 0 6px ${s.color}`,
+                    scale: 1.05,
+                    boxShadow: `0 0 14px ${s.color}`,
                     borderColor: s.color,
                   }}
                   transition={{ type: "spring", stiffness: 250 }}
