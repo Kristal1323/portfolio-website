@@ -22,6 +22,7 @@ export default function Backlog() {
   }, []);
 
   const upcoming = [
+    "Implement `clear` command - clears terminal screen, providing a clean slate ",
     "Implement `ask` command — AI chatbot session to ask Kristal questions.",
     "Add system sound effects for power-on / shutdown / command actions.",
     "Introduce command autocomplete + suggestion hints.",
