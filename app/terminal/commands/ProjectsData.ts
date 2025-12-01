@@ -15,9 +15,9 @@ export const projects: Project[] = [
     name: "PatchWord",
     language: "C",
     file: "main.c",
-    link: "https://patchword-ktru.onrender.com",
+    link: "https://patchword.vercel.app",
     description: paragraph([
-      '"Patchword is a dictionary-driven word game with a distributed subword search engine.',
+      '"PatchWord is a dictionary-driven word game with a distributed subword search engine.',
       '',
       'Core game loop:',
       '- Generates a starter substring and asks players to submit up to five valid dictionary words containing it',
@@ -29,9 +29,9 @@ export const projects: Project[] = [
       '',
       'Web/API wrapper:',
       '- C engine exposed through a FastAPI/uvicorn service with a bundled web UI',
-      '- Packaged in Docker and hosted on Render for easy access',
+      '- Packaged in Docker and hosted on Vercel for easy access',
       '',
-      'Stack: C, FastAPI, Docker, Render."',
+      'Stack: C, FastAPI, Docker, Vercel."',
     ]),
   },
   {
