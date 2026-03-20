@@ -48,7 +48,7 @@ export default function WhoAmI() {
         animate={{ opacity: 1 }}
         transition={{ delay: headerDelay + 0.4 }}
       >
-        Brisbane, Australia 🇦🇺
+        Sydney, Australia 🇦🇺
       </motion.p>
 
       {/* Divider */}
